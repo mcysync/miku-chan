@@ -1,0 +1,232 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Miku-Chan — Blue + Pink dreamscape */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-miku-cyan: var(--miku-cyan);
+  --color-miku-pink: var(--miku-pink);
+  --color-miku-violet: var(--miku-violet);
+
+  --font-display: "Orbitron", "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.9rem;
+
+  --background: oklch(0.16 0.06 275);
+  --foreground: oklch(0.97 0.02 320);
+
+  --card: oklch(0.21 0.07 275 / 0.7);
+  --card-foreground: oklch(0.97 0.02 320);
+
+  --popover: oklch(0.18 0.06 275);
+  --popover-foreground: oklch(0.97 0.02 320);
+
+  --primary: oklch(0.78 0.16 340);              /* pink */
+  --primary-foreground: oklch(0.16 0.06 275);
+
+  --secondary: oklch(0.28 0.09 265);
+  --secondary-foreground: oklch(0.97 0.02 320);
+
+  --muted: oklch(0.24 0.06 275);
+  --muted-foreground: oklch(0.78 0.05 300);
+
+  --accent: oklch(0.82 0.15 205);               /* miku cyan */
+  --accent-foreground: oklch(0.16 0.06 275);
+
+  --destructive: oklch(0.65 0.25 25);
+  --destructive-foreground: oklch(0.97 0.02 320);
+
+  --border: oklch(0.55 0.15 280 / 0.35);
+  --input: oklch(0.24 0.08 275);
+  --ring: oklch(0.78 0.16 340);
+
+  --miku-cyan: oklch(0.82 0.15 205);
+  --miku-pink: oklch(0.82 0.14 350);
+  --miku-violet: oklch(0.62 0.22 300);
+
+  --gradient-miku: linear-gradient(135deg, oklch(0.82 0.15 205), oklch(0.75 0.18 280) 50%, oklch(0.82 0.14 350));
+  --gradient-bg:
+    radial-gradient(ellipse at top left, oklch(0.55 0.20 210 / 0.35), transparent 55%),
+    radial-gradient(ellipse at bottom right, oklch(0.65 0.22 340 / 0.35), transparent 55%),
+    radial-gradient(ellipse at center, oklch(0.35 0.15 285 / 0.4), transparent 70%),
+    oklch(0.1 0.04 275);
+  --shadow-glow-pink: 0 0 40px oklch(0.82 0.14 350 / 0.55);
+  --shadow-glow-cyan: 0 0 40px oklch(0.82 0.15 205 / 0.5);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body {
+    background: var(--gradient-bg);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0.01em;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+  }
+}
+
+/* Starfield */
+@utility starfield {
+  position: relative;
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, white, transparent),
+      radial-gradient(1px 1px at 78% 8%, white, transparent),
+      radial-gradient(1.5px 1.5px at 30% 70%, oklch(0.9 0.1 205), transparent),
+      radial-gradient(1px 1px at 65% 40%, white, transparent),
+      radial-gradient(1.5px 1.5px at 88% 82%, oklch(0.9 0.1 340), transparent),
+      radial-gradient(1px 1px at 45% 90%, white, transparent),
+      radial-gradient(1px 1px at 5% 55%, white, transparent),
+      radial-gradient(1.5px 1.5px at 92% 30%, white, transparent);
+    background-size: 100% 100%;
+    opacity: 0.8;
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes twinkle {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+@utility miku-text {
+  background-image: var(--gradient-miku);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px oklch(0.82 0.15 205 / 0.35);
+}
+
+@utility miku-border {
+  border: 1px solid oklch(0.82 0.15 205 / 0.4);
+  box-shadow:
+    0 0 0 1px oklch(0.82 0.14 350 / 0.2) inset,
+    0 0 30px oklch(0.82 0.15 205 / 0.25),
+    0 0 30px oklch(0.82 0.14 350 / 0.2);
+}
+
+@utility glass-panel {
+  background: linear-gradient(180deg, oklch(0.25 0.08 280 / 0.55), oklch(0.15 0.05 275 / 0.75));
+  backdrop-filter: blur(16px);
+  border: 1px solid oklch(0.82 0.15 205 / 0.2);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.82 0.14 350 / 0.5); }
+  50% { box-shadow: 0 0 45px oklch(0.82 0.15 205 / 0.7); }
+}
+@utility animate-pulse-glow { animation: pulse-glow 2.6s ease-in-out infinite; }
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@utility animate-float { animation: float-y 5s ease-in-out infinite; }
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@utility animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@utility animate-slide-up { animation: slide-up 0.4s ease-out both; }
+
+@keyframes shimmer-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@utility animate-shimmer {
+  background: linear-gradient(90deg,
+    oklch(0.82 0.15 205 / 0.15),
+    oklch(0.82 0.14 350 / 0.35),
+    oklch(0.82 0.15 205 / 0.15));
+  background-size: 200% 100%;
+  animation: shimmer-sweep 2s linear infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@utility animate-spin-slow { animation: spin-slow 20s linear infinite; }
+
+/* Markdown output inside messages */
+.msg-md p { margin: 0.4em 0; }
+.msg-md p:first-child { margin-top: 0; }
+.msg-md p:last-child { margin-bottom: 0; }
+.msg-md code {
+  background: oklch(0.22 0.07 275 / 0.8);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--color-accent);
+}
+.msg-md pre {
+  background: oklch(0.11 0.04 275);
+  border: 1px solid oklch(0.82 0.15 205 / 0.25);
+  padding: 0.85em;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 0.6em 0;
+  box-shadow: inset 0 0 20px oklch(0.82 0.14 350 / 0.05);
+}
+.msg-md pre code { background: transparent; padding: 0; color: inherit; font-size: 0.88em; }
+.msg-md ul, .msg-md ol { padding-left: 1.4em; margin: 0.4em 0; }
+.msg-md a { color: var(--color-accent); text-decoration: underline; }
+.msg-md strong {
+  background-image: var(--gradient-miku);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.msg-md h1, .msg-md h2, .msg-md h3 {
+  font-family: var(--font-display);
+  margin: 0.6em 0 0.3em;
+  color: var(--color-accent);
+}
